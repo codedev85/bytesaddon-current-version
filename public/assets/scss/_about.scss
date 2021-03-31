@@ -1,0 +1,62 @@
+/*----------------------------------------*/
+/*  04. About CSS
+/*----------------------------------------*/
+.about-us-image{
+    a{
+        img{
+            width: 100%;
+        }
+    }
+}
+
+.about-us-content{
+    margin: 50px auto 0px auto;
+    max-width: 950px;
+    text-align: center;
+    // Responsive
+    @media #{$desktop-device}{
+        margin: 35px auto 0px auto;
+    }
+    @media #{$tablet-device}{
+        margin: 35px auto 0px auto;
+    }
+    @media #{$large-mobile}{
+        margin: 35px auto 0px auto;
+    }
+    & h4{
+        font-size: 20px;
+        line-height: 1.5;
+        font-weight: 500;
+        margin: auto;
+        margin-bottom: 35px;
+        max-width: 680px;
+        // Responsive
+        @media #{$desktop-device}{
+            margin-bottom: 25px;
+        }
+        @media #{$tablet-device}{
+            margin-bottom: 25px;
+        }
+        @media #{$large-mobile}{
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+    }
+    & p{
+        margin-bottom: 35px;
+    }
+}
+
+.faq-area, .testimonial-area{
+    h3{
+        font-size: 22px;
+        line-height: 30px;
+        font-weight: 500;
+        margin-bottom: 35px;
+        // Responsive
+        @media #{$large-mobile}{
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+    }
+}

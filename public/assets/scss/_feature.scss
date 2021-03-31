@@ -1,0 +1,76 @@
+/*----------------------------------------*/
+/*  05. Feature CSS
+/*----------------------------------------*/
+.single-feature{
+    text-align: center;
+    &.feature-style-two{
+        & .feature-image{
+            margin-bottom: 30px;
+        }
+        & .feature-content{
+            .title{
+                font-size: 16px;
+                line-height: 22px;
+                font-weight: 500;
+                margin-bottom: 20px;
+            }
+        }
+    }
+    .feature-icon{
+        margin-bottom: 20px;
+        span{
+            font-size: 48px;
+            display: block;
+        }
+    }
+    .feature-content{
+        h4{
+            font-size: 16px;
+            line-height: 21px;
+            font-weight: 500;
+            margin: 0 0 10px;
+        }
+        p{
+            max-width: 400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+    }
+    &.list-mode{
+        display: flex;
+        align-items: center;
+        text-align: left !important;
+        .feature-icon{
+            margin-bottom: 0;
+            margin-right: 20px;
+        }
+        .feature-content{
+            text-align: left;
+            p{
+                line-height: 19px;
+            }
+        }
+    }
+}
+
+.single-service{
+    .service-img{
+        margin-bottom: 25px;
+        // Responsive
+        @media #{$large-mobile}{
+            margin-bottom: 15px;
+        }
+        img{
+            width: 100%;
+        }
+    }
+    .service-content{
+        .title{
+            font-size: 16px;
+            line-height: 22px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+    }
+
+}

@@ -1,0 +1,197 @@
+/*----------------------------------------*/
+/*  22. Footer CSS
+/*----------------------------------------*/
+
+/*-- Footer Widget --*/
+.footer-widget {
+    & .footer-logo{
+        margin-bottom: 30px;
+        & a{
+            display: block;
+            & img{
+                max-width: 100%;
+            }
+        }
+    }
+    // Title
+    & .title {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 500;
+        white-space: nowrap;
+        color: $heading-color;
+        margin-bottom: 40px;
+        // Responsive
+        @media #{$tablet-device}{
+            margin-bottom: 15px;
+        }
+        @media #{$large-mobile}{
+            margin-bottom: 15px;
+        }
+    }
+    & p {
+        max-width: 400px;
+        font-size: 14px;
+        line-height: 23px;
+        margin-bottom: 0;
+        // Responsive
+        
+    }
+    & .phone, & .mail {
+        font-size: 14px;
+        color: #fff;
+        margin-right: 5px;
+    }
+    & .mail{
+        margin-right: 0;
+    }
+    & ul.address {
+        & li {
+            display: flex;
+            font-size: 14px;
+            line-height: 22px;
+            margin-bottom: 12px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+            
+            & i {
+                margin-right: 15px;
+                line-height: 28px;
+                font-size: 18px;
+            }
+            & span {
+                overflow: hidden;
+            }
+            & a {
+                display: block;
+                color: $white;
+                &:hover {
+                    color: $theme-color;
+                }
+            }
+        }
+    }
+    & > .ft-menu{
+        display: inline-block;
+        & > li{
+            font-size: 14px;
+            line-height: 21px;
+            margin-bottom: 15px;
+            &:last-child{
+                margin-bottom: 0;
+            }
+            & > a{
+                text-transform: capitalize;
+                text-decoration: none;
+                display: inherit;
+                color: $body-color;
+                transition: all 0.4s ease-out;
+                & i{
+                    margin-right: 5px;
+                }
+                &:hover{
+                    color: $theme-color;
+                }
+            }
+        }
+    }
+}
+
+/*-- Footer Social --*/
+.footer-social {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    // Responsive
+    @media #{$tablet-device}{
+        justify-content: center;
+    }
+    @media #{$large-mobile}{
+        justify-content: center;
+    }
+    & a {
+        color: #b2b2b2;
+        background: none;
+        border: 2px solid #ebebeb;
+        display: block;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        width: 40px;
+        -webkit-border-radius: 100%;
+        -moz-border-radius: 100%;
+        border-radius: 100%;
+        margin: 0 15px 5px 0;
+        position: relative;
+        &:last-child {
+            margin-right: 0;
+        }
+        &:hover {
+            color: $theme-color;
+        }
+        & i {
+            font-size: 18px;
+        }
+    }
+}
+
+/*-- Footer Bottom --*/
+.footer-bottom{
+    padding: 50px 0;
+}
+/*-- Copyright --*/
+.copyright {
+    // Responsive
+    @media #{$large-mobile}{
+        text-align: center !important;
+    }
+    & p {
+        line-height: 25px;
+        font-size: 14px;
+        color: $body-color;
+        // Responsive
+        @media #{$tablet-device}{
+            margin: 30px 0;
+        }
+        @media #{$large-mobile}{
+            margin: 30px 0;
+        }
+        @media #{$small-mobile}{
+            font-size: 12px;
+        }
+        & a {
+            color: $theme-color;
+            &:hover {
+                color: $theme-color;
+            }
+        }
+    }
+}
+.footer-nav{
+    // Responsive
+    @media #{$large-mobile}{
+        text-align: center !important;
+    }
+    & ul{
+        & li{
+            display: inline-block;
+            margin: 0 40px 0 0;
+            vertical-align: middle;
+            // Responsive
+            @media #{$large-mobile}{
+                margin: 0 25px 0 0;
+            }
+            &:last-child{
+                margin-right: 0;
+            }
+            & a{
+                font-size: 13px;
+                line-height: 19px;
+            }
+        }
+    }
+}

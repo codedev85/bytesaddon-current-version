@@ -1,0 +1,79 @@
+/*---------------------------------------
+    13. Testimonial CSS
+-----------------------------------------*/
+
+.testimonial-wrapper{
+    padding: 60px 25px;
+}
+.single-testimonial-item{
+    text-align: center;
+    & .testimonial-image{
+        margin: 0 auto;
+        width: 70px;
+        height: 70px;
+        border-radius: 70px;
+        overflow: hidden;
+        vertical-align: middle;
+        img{
+           
+        }
+    }
+    & .testimonial-content {
+        max-width: 900px;
+        margin: 30px auto 30px auto;
+        .testimonial-text{
+            color: $body-color;
+            font-size: 14px;
+            font-style: 400;
+            line-height: 2;
+        }
+        img{
+            display: inline-block;
+            margin: 0 auto;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-author{
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 20px;
+            color: $heading-color;
+        }
+    }
+}
+
+
+
+.testimonial-wrapper{
+    & .slick-dots {
+        width: 100%;
+        padding: 0;
+        margin: 0px 0 0;
+        display: flex;
+        justify-content: center;
+        & li {
+            margin: 0 5px;
+            & button {
+                display: block;
+                padding: 0;
+                width: 14px;
+                height: 14px;
+                border: 2px solid $theme-color;
+                background-color: $theme-color;
+                text-indent: -9999px;
+                border-radius: 100%;
+            }
+            &.slick-active {
+                & button {
+                    border-color: $theme-color;
+                    background-color: $white;
+                }
+            }
+        }
+    }
+}
+
+
+
+/*=====  End of testimonial  ======*/
+

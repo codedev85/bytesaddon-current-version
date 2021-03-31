@@ -1,0 +1,57 @@
+/*----------------------------------------*/
+/*  20. Instagram CSS
+/*----------------------------------------*/
+
+
+.instagram-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  #Instafeed > li {
+    display: block;
+    float: left;
+    width: 16.66%;
+    padding: 0;
+    margin: 0;
+    // Responsive
+    @media #{$large-mobile}{
+      width: 50%;
+    }
+    > a {
+      display: block;
+      -webkit-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+      position: relative;
+  
+      &:before {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        right: 15px;
+        bottom: 15px;
+        content: "";
+        background: rgba(0, 0, 0, 0.5);
+        -webkit-transform: scale3d(1.2, 1.2, 1.2);
+        transform: scale3d(1.2, 1.2, 1.2);
+        opacity: 0;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+      }
+
+  
+      &:hover {
+        &:before {
+          -webkit-transform: scale3d(1, 1, 1);
+          transform: scale3d(1, 1, 1);
+          opacity: 1;
+          -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+      }
+  
+      > img {
+        width: 100%;
+      }
+    }
+  }

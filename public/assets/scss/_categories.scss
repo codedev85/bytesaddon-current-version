@@ -1,0 +1,177 @@
+/*----------------------------------------*/
+/*  09. Categories CSS
+/*----------------------------------------*/
+
+.categories-action{
+    .title{
+        font-size: 20px;
+        color: #fff;
+        font-weight: 500;
+        margin: 0;
+    }
+    p{
+        font-size: 14px;
+        line-height: 22px;
+        margin: 17px 0;
+        color: #949494;
+    }
+}
+
+.single-categories-item{
+    padding-top: 30px;
+    background:#2e2e3b;
+    margin-bottom: 0px;
+    border: 2px solid #2e2e3b;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+    .cate-icon{
+        margin-bottom: 35px;
+        text-align: center;
+    }
+    .cate-content{
+        margin-bottom: 35px;
+        text-align: center;
+        a{
+            display: block;
+            color: #949494;
+        }
+    }
+    &:hover{
+        border: 2px solid $theme-color;
+        .cate-content{
+            a{
+                color: $theme-color;
+            }
+        }
+    }
+}
+
+.single-categories-banner{
+    position: relative;
+    .banner-image{
+        a{
+            display: block;
+            img{
+                width: 100%;
+            }
+        }
+    }
+    .banner-content{
+        position: absolute;
+        bottom: 10px;
+        left: 40px;
+        transform: translate(00,-50%);
+        text-align: left;
+        z-index: 9;
+        // Responsive
+        @media #{$laptop-device}{
+            left: 15px;
+        }
+        @media #{$desktop-device}{
+            left: 15px;
+        }
+        @media #{$large-mobile}{
+            left: 15px;
+        }
+        
+        h5{
+            font-size: 18px;
+            line-height: 1;
+            font-weight: 500;
+            margin: 0 0 5px 0;
+            text-transform: capitalize;
+            color: #323232;
+        }
+        a{
+            color:#808080;
+            display: block;
+            font-size: 14px;
+            line-height: 25px;
+            &:hover{
+                color: $theme-color;
+            }
+        }
+
+        h4{
+            font-size: 24px;
+            line-height: 1;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+        p{
+            font-size: 14px;
+            line-height: 25px;
+            color: $heading-color;
+        }
+    }
+}
+
+.offer-banner{
+    max-width: 550px;
+    width: 100%;
+    padding: 125px 0;
+    margin: auto;
+    margin-bottom: 35px;
+    background: url(../images/banner/bkg_img.jpg) no-repeat center center;
+    // Responsive
+    @media #{$extra-small-mobile}{
+        padding: 80px 0;
+    }
+}
+.offer-banner-content{
+    text-align: center;
+    p{
+        font-size: 14px;
+        line-height: 25px;
+        color: $heading-color;
+    }
+    h4{
+        font-size: 35px;
+        line-height: 47px;
+        font-weight: 400;
+        position: relative;
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+        // Responsive
+        @media #{$small-mobile}{
+            font-size: 26px;
+            line-height: 26px;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        // Responsive
+        @media #{$extra-small-mobile}{
+            font-size: 22px;
+            line-height: 22px;
+        }
+        &::before{
+            content: "";
+            width: 80px;
+            height: 3px;
+            background: $theme-color;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+    }
+    .f-16{
+        font-size: 16px;
+        line-height: 28px;
+        color: $heading-color;
+    }
+    h2{
+        font-size: 150px;
+        line-height: 160px;
+        color: $theme-color;
+        font-weight: 500;
+        margin-bottom: 15px;
+        // Responsive
+        @media #{$small-mobile}{
+            font-size: 100px;
+            line-height: 100px;
+        }
+    }
+}
