@@ -52,66 +52,7 @@
             </div>
         </div>
         <!-- Container-fluid starts-->
-{{--        <div class="card">--}}
-{{--            <div class="card-header">--}}
-{{--               <h2>Product(s)</h2>--}}
-{{--            </div>--}}
-{{--            <div class="card-body">--}}
-{{--                    <div class="row size-column">--}}
-{{--                        <div class="col-xl-12 col-md-12 col-lg-12 col-sm-12 box-col-12 xl-100">--}}
-{{--                            <div class="row dash-chart">--}}
-{{--                                <div class="col-xl-1"></div>--}}
-{{--                                <div class="col-xl-10 col-lg-10 col-sm-10 col-xs-10 box-col-6 col-md-6">--}}
-{{--                                    <div class="container mt-5">--}}
-{{--                                        <table class="table table-striped">--}}
-{{--                                            <thead>--}}
-{{--                                            <tr>--}}
-{{--                                                <th scope="col">#</th>--}}
-{{--                                                <th scope="col">Product name</th>--}}
-{{--                                                <th scope="col">Product Description</th>--}}
-{{--                                                <th scope="col">Product Price</th>--}}
-{{--                                                <th scope="col">Product Image</th>--}}
-{{--                                                <th scope="col">Last</th>--}}
-{{--                                                <th scope="col">Handle</th>--}}
-{{--                                            </tr>--}}
-{{--                                            </thead>--}}
-{{--                                            <tbody>--}}
-{{--                                            <tr>--}}
-{{--                                                <th scope="row">1</th>--}}
-{{--                                                <td>Mark</td>--}}
-{{--                                                <td>Otto</td>--}}
-{{--                                                <td>@mdo</td>--}}
-{{--                                                <td>Larry</td>--}}
-{{--                                                <td>the Bird</td>--}}
-{{--                                                <td>@twitter</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <th scope="row">2</th>--}}
-{{--                                                <td>Jacob</td>--}}
-{{--                                                <td>Thornton</td>--}}
-{{--                                                <td>@fat</td>--}}
-{{--                                                <td>Larry</td>--}}
-{{--                                                <td>the Bird</td>--}}
-{{--                                                <td>@twitter</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <th scope="row">3</th>--}}
-{{--                                                <td>Larry</td>--}}
-{{--                                                <td>the Bird</td>--}}
-{{--                                                <td>@twitter</td>--}}
-{{--                                                <td>Larry</td>--}}
-{{--                                                <td>the Bird</td>--}}
-{{--                                                <td>@twitter</td>--}}
-{{--                                            </tr>--}}
-{{--                                            </tbody>--}}
-{{--                                        </table>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
+
         <div class="card text-center">
             <div class="card-header"><h2>Product(s)</h2></div>
             <div class="card-body">
@@ -149,17 +90,28 @@
                         <td><a href="">{{Ucfirst(str_limit($product->name ,$limit=50 ,$end='...'))}}</a></td>
                         <td>{{Ucfirst(str_limit($product->description, $limit=50,$end='...'))}}</td>
                         <td>&#8358; {{number_format($product->amount)}}</td>
-                        <td><img src="{{url('storage/'.$product->image1)}}"  height="150" width="150"/></td>
+                        <td><img src="{{url('storage/'.$product->image1)}}"  height="100" width="100"/></td>
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Action Button
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="{{ url('/product/'.$product->slug.'/edit') }}">
                                     <button class="dropdown-item" type="button">Edit</button>
+                                    </a>
                                     <button class="dropdown-item" type="button">Status</button>
                                     <hr>
-                                    <button class="dropdown-item" type="button">Delete</button>
+                                    <button class="dropdown-item" type="button">
+                                        <form id="delete-form" method="POST" action="{{ url('/product/delete/'.$product->slug) }}">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                        
+                                            <div class="form-group">
+                                              <input type="submit" class="btn btn-danger" value="Delete Product">
+                                            </div>
+                                          </form>
+                                    </button>
                                 </div>
                             </div>
                         </td>

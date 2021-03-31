@@ -28,7 +28,8 @@ class Product extends Controller
                         'name'          => 'required',
                         'amount'        => 'required|integer',
                         'description'   =>  'required',
-                        'category'   =>  'required|integer',
+                        'category'      =>  'required|integer',
+                        'quantity'      =>   'required|integer',
                  ]);
 
             if ($request->hasFile('image1') && $request->hasFile('image2') && $request->hasFile('image3')) {
@@ -75,6 +76,7 @@ class Product extends Controller
             $product->amount           = $request->amount;
             $product->category_id      = $request->category;
             $product->category_sub_id  = $request->sub_category;
+            // $product->quantity         = $request->quantity;
             $product->image1           = $url;
             $product->image2           = $url2;
             $product->image3           = $url3;
@@ -89,6 +91,87 @@ class Product extends Controller
     }
 
 
+    public function edit($slug){
+
+        $product =   Prod::where('slug', $slug)->first();
+        $categories = Category::get();
+
+        return view('product.edit', compact('product','categories'));
+
+    }
+
+    public function update(Request $request, $slug){
+      
+        $updateProduct          =  Prod::where('slug',$slug)->first();
+                                   Prod::where('slug',$slug)->update([
+                                    'name'        => $request->name,
+                                    'amount'      => $request->amount,
+                                    'description' => $request->description,
+                                    'category_id' => $request->category,
+                                    'category_sub_id' => !is_null($request->sub_category) ? $request->sub_category : $updateProduct->category_sub_id,
+                                ]);
+
+                               
+                        if($request->hasFile('image1') && $request->hasFile('image2') && $request->hasFile('image3')){
+                        
+                            //                $this->validate($request, [
+                            //                    'image1' => 'required|mimes:jpeg,png,jpg,gif,svg|dimensions:min_width=300,min_height=300',
+                            //                    'image2' => 'required|mimes:jpeg,png,jpg,gif,svg|dimensions:min_width=300,min_height=300',
+                            //                    'image3' => 'required|mimes:jpeg,png,jpg,gif,svg|dimensions:min_width=300,min_height=300',
+                            //                ]);
+
+                                        $image = $request->file('image1');
+                                        $ext = $image->getClientOriginalExtension();
+                                        $image_resize = Image::make($image->getRealPath());
+                                        $resize = Image::make($image_resize)->fit(300, 300)->encode($ext);
+                                        $hash = md5($resize->__toString());
+                                        $path = "{$hash}.$ext";
+                                        $url = 'product/' . $path;
+                                        Storage::put($url, $resize->__toString());
+                        
+                                        $image2 = $request->file('image2');
+                                        $ext2 = $image2->getClientOriginalExtension();
+                                        $image_resize2 = Image::make($image2->getRealPath());
+                                        $resize2 = Image::make($image_resize2)->fit(300, 300)->encode($ext2);
+                                        $hash2 = md5($resize2->__toString());
+                                        $path2 = "{$hash2}.$ext2";
+                                        $url2 = 'product/' . $path2;
+                                        Storage::put($url2, $resize2->__toString());
+                        
+                                        $image3 = $request->file('image3');
+                                        $ext3 = $image3->getClientOriginalExtension();
+                                        $image_resize3 = Image::make($image3->getRealPath());
+                                        $resize3 = Image::make($image_resize3)->fit(300, 300)->encode($ext3);
+                                        $hash3 = md5($resize3->__toString());
+                                        $path3 = "{$hash3}.$ext3";
+                                        $url3 = 'product/' . $path3;
+                                        Storage::put($url3, $resize3->__toString());
+                                       
+                                        $updateProduct->update([
+                                            'image1' => $url,
+                                            'image2' => $url2,
+                                            'image3' => $url3
+                                        ]);
+                                 
+                        
+                        }
+                        
+                alert()->success('Product updated successfully', 'Successful')->autoclose(3500);
+
+                return back();
+
+    }
+
+
+    public function destroy($slug){
+
+        Prod::where('slug',$slug)->delete();
+
+        alert()->success('Product deleted  successfully', 'Successful')->autoclose(3500);
+
+        return back();
+
+    }
 
 
     public function createSlug($title, $id = 0)

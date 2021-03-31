@@ -89,6 +89,12 @@ Route::post('/authenticate/admin', [App\Http\Controllers\AdminLogin::class,'admi
         Route::get('/fetch/products',[App\Http\Controllers\Product::class, 'fetchProduct'])->name('fetch.products');
         Route::get('subcategory/fetch/{id}',[App\Http\Controllers\Category::class , 'subcategoryfetch'])->name('ajax.subcategory');
 
+        //edit status
+        Route::get('product/{slug}/edit',[App\Http\Controllers\Product::class , 'edit'])->name('edit.product');
+        Route::post('/store/product/update/{slug}' , [App\Http\Controllers\Product::class , 'update'])->name('update.product');
+        //delete product
+        Route::delete('/product/delete/{slug}' , [App\Http\Controllers\Product::class , 'destroy'])->name('delete.product');
+
         //search Products
         Route::post('/search/products',[App\Http\Controllers\Product::class ,'productSearch'])->name('product.search');
 

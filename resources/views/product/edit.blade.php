@@ -12,7 +12,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
                             <li class="breadcrumb-item">Dashboard</li>
-                            <li class="breadcrumb-item">Add Product</li>
+                            <li class="breadcrumb-item">Edit Product</li>
                         </ol>
                     </div>
                     <div class="col-6">
@@ -61,26 +61,26 @@
                                 <div class="container-fluid">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Add Product</h5>
+                                            <h5>Edit Product</h5>
                                         </div>
                                         <div class="card-body">
-                                            <form action="{{url('/store/product')}}" method="post" enctype="multipart/form-data">
+                                            <form action="{{url('/store/product/update/'.$product->slug)}}" method="post" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mb-3">
                                                         <label for="product_name">Product Name</label>
-                                                        <input class="form-control" id="product_name" type="text" placeholder="Product Name" value="{{old('name')}}" name="name" required>
+                                                        <input class="form-control" id="product_name" type="text" placeholder="Product Name" value="{{ $product->name }}" name="name" required>
 {{--                                                        <span>{{errors()->first('category')}}</span>--}}
                                                     </div>
                                                     <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mb-3">
                                                         <label for="product_name">Amount</label>
-                                                        <input class="form-control" id="amount" type="text" placeholder="Product Amount" value="{{old('amount')}}" name="amount" required>
+                                                        <input class="form-control" id="amount" type="text" placeholder="Product Amount" value="{{$product->amount}}" name="amount" required>
                                                         {{--                                                        <span>{{errors()->first('category')}}</span>--}}
                                                     </div>
                                                     <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mb-3">
                                                         <label for="categoryId">Category</label>
                                                       <select name="category" id="categoryId" class="form-control">
-                                                          <option value="">-- Select Category ---</option>
+                                                          <option value="{{ $product->category['id'] }}">{{ $product->category['category'] }}</option>
                                                           @foreach($categories as $key => $cat)
                                                               <option value="{{$cat->id}}">{{$cat->category}}</option>
                                                           @endforeach
@@ -89,15 +89,12 @@
                                                     <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mb-3">
                                                     <div class="form-group">
                                                         <label for="subcategory">Select SubCategory:</label>
+                                
                                                         <select name="sub_category" class="form-control" id="subcategory" >
                                                         </select>
                                                     </div>
                                                     </div>
-                                                    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mb-3">
-                                                        <label for="product_name">Add product Quantity</label>
-                                                        <input class="form-control" id="quantity" type="number" placeholder="Product Quantity"  name="quantity" required>
-                                                        {{--                                                        <span>{{errors()->first('category')}}</span>--}}
-                                                    </div>
+                                                
                                                     <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mb-3">
                                                         <label for="image1">Image1</label>
                                                         <input type="file" class="form-control" name="image1"/>
@@ -116,12 +113,12 @@
 
                                                     <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mb-3">
                                                         <label for="description">Description</label>
-                                                        <textarea class="form-control" cols="10" rows="10"  name="description"></textarea>
+                                                        <textarea class="form-control" cols="10" rows="10"  name="description">{{ $product->description }}</textarea>
                                                         {{--                                                        <span>{{errors()->first('category')}}</span>--}}
                                                     </div>
 
                                                 </div>
-                                                <button class="btn btn-primary" type="submit">Submit</button>
+                                                <button class="btn btn-primary" type="submit">Update  - {{ $product->name }}</button>
                                             </form>
                                         </div>
                                     </div>

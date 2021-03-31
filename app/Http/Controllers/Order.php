@@ -127,8 +127,10 @@ class Order extends Controller
                     ]);
 
                   array_push($orderArray , $order);
+
                 }
 
+        
                 if($order && is_null(auth()->user()->address)){
 
                     User::where('id',auth()->user()->id)->update([
@@ -143,12 +145,13 @@ class Order extends Controller
                 }
 
                 $usersEmail = auth()->user()->email;
-
+        
                 //send mail to admin
                 Mail::to("admin@admin.com")->send(new Sale($orderArray  ,$usersEmail));
 
                 //send mail to the user
                 $user = auth()->user()->name;
+           
 
                 Mail::to(auth()->user()->email)->send(new Orders($user, $orderArray));
 
