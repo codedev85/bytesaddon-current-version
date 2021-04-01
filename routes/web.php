@@ -74,12 +74,19 @@ Route::post('/authenticate/admin', [App\Http\Controllers\AdminLogin::class,'admi
         Route::get('/category/{id}/edit',[App\Http\Controllers\Category::class, 'edit'])->name('edit.category');
         //categry
         Route::get('/category/{id}', [App\Http\Controllers\Category::class ,'productCategory'])->name('product.category');
+        //update
+        Route::get('/category/{id}/edit/',[App\Http\Controllers\Category::class, 'edit'])->name('edit.category');
+        Route::post('/category/update/{id}/',[App\Http\Controllers\Category::class, 'update'])->name('update.category');
         //fetch sub category
         Route::get('/sub-category/index', [App\Http\Controllers\SubCategory::class ,'index'])->name('index.subcategory');
         Route::get('/sub-category/{id}', [App\Http\Controllers\Category::class ,'productSubCategory'])->name('product.subcategory');
         //add sub category
         Route::get('add/sub-category',[App\Http\Controllers\SubCategory::class,'add'])->name('add.sub.category');
         Route::post('store/sub-category',[App\Http\Controllers\SubCategory::class, 'store'])->name('store.sub.category');
+
+        //update
+        Route::get('/subcategory/{id}/edit/',[App\Http\Controllers\SubCategory::class, 'edit'])->name('edit.subcategory');
+        Route::post('/subcategory/update/{id}/',[App\Http\Controllers\SubCategory::class, 'update'])->name('update.subcategory');
 
 
         //products

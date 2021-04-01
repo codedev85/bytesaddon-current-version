@@ -81,7 +81,8 @@
                                             <td>{{$cat->sub_category}}</td>
                                             <th>{{$cat->category['category']}}</th>
                                             <td>
-                                               <button type="button" class="btn btn-success" id="editCat" data-toggle="modal" data-target="#editModal"  data-attr="{{url('/category/'.$cat->id.'/edit')}}" >Edit</button>
+                                               <button type="button" class="btn btn-success" id="editCat" data-toggle="modal" data-target="#editModal"  data-id="{{ $cat->id }}" >Edit</button>
+                                               {{-- data-attr="{{url('/category/'.$cat->id.'/edit')}}" --}}
                                             </td>
                                         </tr>
                                             @endforeach
@@ -101,55 +102,70 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Category</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Sub Category</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <label>Category Name</label>
-                    <input type="text" class="form-control"/>
+                    <label>Sub Category Name</label>
+                    <input type="text" class="form-control"id="sub_cat_name"/>
+                    <input type="hidden" class="form-control"id="subcat_id"/>
+                    
                 </div>
+              
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" id="submit">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
     <!--- modal ends here -->
-
-{{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>--}}
-{{--    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>--}}
-{{--    <script>--}}
-{{--        // display a modal (small modal)--}}
-{{--        $(document).on('click', '#editCat', function(event) {--}}
-{{--            event.preventDefault();--}}
-{{--            let href = $(this).attr('data-attr');--}}
-{{--            console.log(href)--}}
-{{--            $.ajax({--}}
-{{--                url: href,--}}
-
-{{--                beforeSend: function() {--}}
-{{--                    $('#loader').show();--}}
-{{--                },--}}
-{{--                // return the result--}}
-{{--                success: function(result) {--}}
-{{--                    $('#smallModal').modal("show");--}}
-{{--                    $('#smallBody').html(result).show();--}}
-{{--                },--}}
-{{--                complete: function() {--}}
-{{--                    $('#loader').hide();--}}
-{{--                },--}}
-{{--                error: function(jqXHR, testStatus, error) {--}}
-{{--                    console.log(error);--}}
-{{--                    alert("Page " + href + " cannot open. Error:" + error);--}}
-{{--                    $('#loader').hide();--}}
-{{--                },--}}
-{{--                timeout: 8000--}}
-{{--            })--}}
-{{--    --}}
-{{--        });--}}
-{{--    </script>--}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script>
+         $(document).ready(function () {
+ 
+             $.ajaxSetup({
+                 headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                 }
+             });
+ 
+             $('body').on('click', '#submit', function (event) {
+ 
+                 event.preventDefault()
+                 var id = $("#subcat_id").val();
+                 var subcat = $("#sub_cat_name").val();
+                 $.ajax({
+                     url: '/subcategory/update/' + id,
+                     type: "POST",
+                     data: {
+                         id: id,
+                         subcat : subcat,
+                     },
+                     dataType: 'json',
+                     success: function (data) {
+                         $('#statusdata').trigger("reset");
+                         $('#statusModal').modal('hide');
+                         window.location.reload(true);
+                     }
+                 });
+             });
+ 
+             $('body').on('click', '#editCat', function (event) {
+                 event.preventDefault();
+                 var id = $(this).data('id');
+                 $.get('/subcategory/' + id + '/edit', function (data) {
+                  
+                     $('#subcat_id').val(data.data.id);
+                     $('#sub_cat_name').val(data.data.sub_category);
+                 })
+                 
+             });
+ 
+             });
+    </script>
 @endsection
 

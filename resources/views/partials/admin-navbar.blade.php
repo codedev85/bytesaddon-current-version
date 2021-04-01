@@ -24,7 +24,15 @@
                             <div class="row">
                                 <div class="col mega-box">
                                     <div class="mobile-title d-none">
-                                        <h5>Mega menu</h5><i data-feather="x"></i>
+                                        <h5>
+                                            <a href="{{ route('logout') }}"  onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> Log-out</a>
+
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                @csrf
+                                            </form>  
+                                        </h5><i data-feather="x"></i>
+                                       
                                     </div>
                             
                                 </div>
@@ -38,20 +46,7 @@
         <div class="nav-right col-8 pull-right right-menu">
             <ul class="nav-menus">
                 <li class="language-nav">
-                    {{-- <div class="translate_wrapper">
-                        <div class="current_lang">
-                            <div class="lang"><i class="flag-icon flag-icon-us"></i><span class="lang-txt">EN                               </span></div>
-                        </div>
-                        <div class="more_lang">
-                            <div class="lang selected" data-value="en"><i class="flag-icon flag-icon-us"></i><span class="lang-txt">English<span> (US)</span></span></div>
-                            <div class="lang" data-value="de"><i class="flag-icon flag-icon-de"></i><span class="lang-txt">Deutsch</span></div>
-                            <div class="lang" data-value="es"><i class="flag-icon flag-icon-es"></i><span class="lang-txt">Español</span></div>
-                            <div class="lang" data-value="fr"><i class="flag-icon flag-icon-fr"></i><span class="lang-txt">Français</span></div>
-                            <div class="lang" data-value="pt"><i class="flag-icon flag-icon-pt"></i><span class="lang-txt">Português<span> (BR)</span></span></div>
-                            <div class="lang" data-value="cn"><i class="flag-icon flag-icon-cn"></i><span class="lang-txt">简体中文</span></div>
-                            <div class="lang" data-value="ae"><i class="flag-icon flag-icon-ae"></i><span class="lang-txt">لعربية <span> (ae)</span></span></div>
-                        </div>
-                    </div> --}}
+           
                 </li>
                 <li><span class="header-search"><i data-feather="search"></i></span></li>
                 <li>
@@ -61,13 +56,12 @@
                 <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
                 <li class="profile-nav onhover-dropdown p-0">
                     <div class="media profile-media"><img class="b-r-10" src="../assets/images/dashboard/profile.jpg" alt="">
-                        <div class="media-body"><span>Emay Walter</span>
-                            <p class="mb-0 font-roboto">Admin <i class="middle fa fa-angle-down"></i></p>
+                        <div class="media-body"><span>{{ auth()->user()->name }}</span>
+                        
                         </div>
                     </div>
                     <ul class="profile-dropdown onhover-show-div">
                         <li><i data-feather="user"></i><span>Account </span></li>
-                        <li><i data-feather="mail"></i><span>Inbox</span></li>
 
                         <a href="{{ route('logout') }}"  onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> Logout</a>

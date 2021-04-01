@@ -46,7 +46,23 @@ class Category extends Controller
 
     public function edit($id){
 
-        dd($id);
+       $cat =  Cat::where('id',$id)->first();
+
+        return response()->json([
+            'data' => $cat
+        ]);
+    }
+
+    public function update(Request $request , $id){
+        
+        Cat::where('id',$id)->update([
+            'category' => $request['cat']
+        ]);
+
+        return response()->json([
+            'success'=> true,
+        ]);
+
     }
 
 

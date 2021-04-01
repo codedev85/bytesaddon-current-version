@@ -42,4 +42,26 @@ class SubCategory extends Controller
 
         return back();
     }
+
+    public function edit($id){
+
+        $cat =  SubCat::where('id',$id)->with('category')->first();
+ 
+         return response()->json([
+             'data' => $cat
+         ]);
+
+     }
+ 
+     public function update(Request $request , $id){
+         
+         SubCat::where('id',$id)->update([
+             'sub_category' => $request['subcat']
+         ]);
+ 
+         return response()->json([
+             'success'=> true,
+         ]);
+ 
+     }
 }

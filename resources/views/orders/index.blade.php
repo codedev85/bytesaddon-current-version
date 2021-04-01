@@ -193,6 +193,7 @@
             $('body').on('click', '#updateStatus', function (event) {
                 event.preventDefault();
                 var id = $(this).data('id');
+                console.log(id)
 
                 $.get('/order/' + id + '/status', function (data) {
                     // $('#userCrudModal').html("Edit Staff");

@@ -180,6 +180,7 @@ return [
         Yoeunes\Toastr\ToastrServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+      
 
     ],
 
