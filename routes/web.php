@@ -46,7 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/checkout',[App\Http\Controllers\Checkout::class ,'checkout'])->name('checkout');
 
   //make order
-    Route::post('/order',[App\Http\Controllers\Order::class, 'order'])->name('order');
+    Route::post('/order/',[App\Http\Controllers\Order::class, 'order'])->name('order');
 
     //payment page
     Route::get('/payment/page',[App\Http\Controllers\Order::class,'addPayment'])->name('payment.page');
@@ -107,9 +107,14 @@ Route::post('/authenticate/admin', [App\Http\Controllers\AdminLogin::class,'admi
 
         //search orders
         Route::post('/search/orders',[App\Http\Controllers\Order::class ,'orderSearch'])->name('order.search');
-        //list orders
-        Route::get('/list/orders',[App\Http\Controllers\Order::class , 'ListOrders'])->name('list.orders');
+        Route::post('/search/orders/params',[App\Http\Controllers\Order::class ,'orderSearchByParams'])->name('order.search.params');
 
+        //list orders
+        Route::get('/list/orders/',[App\Http\Controllers\Order::class , 'ListOrders'])->name('list.orders');
+
+        //customers
+        Route::get('/customers',[App\Http\Controllers\Customer::class , 'index'])->name('index');
+        Route::get('/customer/{id}',[App\Http\Controllers\Customer::class , 'show'])->name('show');
 
         //invoice
         Route::get('/order/invoice/{id}',[App\Http\Controllers\Invoice::class ,'viewInvoiceAdmin'])->name('admin.view.invoice');

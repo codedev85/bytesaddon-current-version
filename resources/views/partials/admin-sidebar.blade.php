@@ -52,9 +52,20 @@
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Orders</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/list/orders')}}">All Orders</a></li>
-                            <li><a href="projectcreate.html">Delivered</a></li>
-                            <li><a href="projectcreate.html">Pending</a></li>
-                            <li><a href="projectcreate.html">Rejected</a></li>
+{{--                            <li><a href="projectcreate.html">Delivered</a></li>--}}
+{{--                            <li><a href="projectcreate.html">Pending</a></li>--}}
+{{--                            <li><a href="projectcreate.html">Rejected</a></li>--}}
+                        </ul>
+                    </li>
+                    <li class="sidebar-title">
+                        <div>
+                            <h6>Customer</h6>
+                            <p >All Customers</p>
+                        </div>
+                    </li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Customers</span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('/customers')}}">All Customers</a></li>
                         </ul>
                     </li>
 

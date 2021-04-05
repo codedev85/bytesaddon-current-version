@@ -1,5 +1,5 @@
 @extends('layouts.app-admin')
-@section('title' ,'Admin-Dashboard | Add Product')
+@section('title' ,'Admin-Dashboard | Customers')
 @section('admin-content')
 
     <div class="page-body">
@@ -12,7 +12,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
                             <li class="breadcrumb-item">Dashboard</li>
-                            <li class="breadcrumb-item">Orders</li>
+                            <li class="breadcrumb-item">Customers</li>
                         </ol>
                     </div>
                     <div class="col-6">
@@ -51,62 +51,9 @@
                 </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-body">
-              <form action="{{url('/search/orders/params')}}" method="POST">
-                  @csrf
-                  <div style="display:flex;">
-                      <div class="col-md-4">
-                          <div class="form-group" >
-                              <label>State Date</label>
-                              <input type="date" class="form-control" name="start_date"/>
-                          </div>
-                          <div class="form-group">
-                              <label>End Date</label>
-                              <input type="date" class="form-control" name="end_date"/>
-                          </div>
-                      </div>
-                      <div class="col-md-4">
-                          <div class="form-group" >
-                              <label>Order ID</label>
-                              <input type="text"  class="form-control" name="order_ref"/>
-                          </div>
-                          <div class="form-group">
-                              <label>Order Status</label>
-                              <select class="form-control" name="order_status">
-                                  <option value="">Select Status</option>
-                                  <option value="pending">Pending</option>
-                                  <option value="processing">Processing</option>
-                                  <option value="transit">Transit</option>
-                                  <option value="rejected">Rejected</option>
-                                  <option value="delivered">Delivered</option>
-                              </select>
-                          </div>
-                      </div>
-                      <div class="col-md-4">
-                          <div class="form-group" >
-                              <label>Buyer Email</label>
-                              <input type="email"  class="form-control" name="buyer_email"/>
-                          </div>
-                          <div class="form-group">
-                              <label>Buyer Phone Number</label>
-                              <input type="number"  class="form-control" name="buyer_phone"/>
-                          </div>
 
-                      </div>
-
-
-                  </div>
-
-                      <div>
-                          <button class="btn btn-success">Search</button>
-                      </div>
-
-              </form>
-            </div>
-        </div>
         <div class="card text-center">
-            <div class="card-header"><h2>Order(s)</h2></div>
+            <div class="card-header"><h2>Customer(s)</h2></div>
             <div class="card-body">
                 <div style="display:flex; justify-content: flex-end;">
                     <div class="col-md-4 col-lg-4 col-xl-4 col-sm-4">
@@ -128,89 +75,86 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Buyer's Name</th>
-                        <th scope="col">Buyer's Address</th>
-                        <th scope="col">Buyer's Phone Number</th>
-                        <th scope="col">Order Name</th>
-                        <th scope="col">Order Amount</th>
-                        <th scope="col">Order Status</th>
-                        <th scope="col">Order Created</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">Customer Since</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($orders as $key => $order)
-                    <tr>
-                        <th scope="row">{{$key + 1}}</th>
-                        <td><a href="">{{Ucfirst(str_limit($order->user->name ,$limit=50 ,$end='...'))}}</a></td>
-                        <td>{{Ucfirst(str_limit($order->user->address, $limit=50,$end='...'))}}</td>
-                        <th >{{$order->phone_number}}</th>
-                        <td><a href="">{{Ucfirst(str_limit($order->product->name ,$limit=50 ,$end='...'))}}</a></td>
-                        <td>&#8358; {{number_format($order->product->amount)}}</td>
-                        <td>{{Ucfirst($order->status)}}</td>
-                        <td>{{$order->created_at->format('D M Y')}}</td>
-                        <td>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Action Button
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="{{url('/order/invoice/'.$order->id)}}"><button class="dropdown-item" type="button">View Order</button></a>
-                                    <hr>
-                                    <button class="dropdown-item" type="button" id="updateStatus" data-toggle="modal" data-target="#statusModal"  data-id="{{$order->id}}" >Change Status</button>
-
+                    @foreach($customers as $key => $customer)
+                        <tr>
+                            <th scope="row">{{$key + 1}}</th>
+                            <td><a href="">{{Ucfirst($customer->name)}}</a></td>
+                            <td><a href="">{{$customer->email}}</a></td>
+                            <td>{{Ucfirst(str_limit($customer->address, $limit=50,$end='...'))}}</td>
+                            <th >{{$customer->phone_number}}</th>
+                            <td>{{$customer->created_at->diffforhumans()}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Action Button
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a href="{{url('/customer/'.$customer->id)}}"><button class="dropdown-item" type="button">View Customer</button></a>
+                                        <hr>
+                                        <button class="dropdown-item" type="button" id="updateStatus" data-toggle="modal" data-target="#statusModal"  data-id="{{$customer->id}}" >Send Mail</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                        @endforeach
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
 
             </div>
 
-            <div class="card-footer text-muted">{{$orders->links()}}</div>
+            <div class="card-footer text-muted">{{$customers->links()}}</div>
         </div>
 
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="statusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
+    <div class="modal fade" id="statusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+        <div class="modal-dialog" role="document" >
+            <div class="modal-content" style="padding:15px;">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update Order Status</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Send Email</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <form id="statusdata">
-                <input type="hidden" id="status_id" name="status_id" value="">
-                <div style="display:flex; justify-content: flex-end">
-                    <h3 id="current_status" class="text-success"></h3>
-                </div>
+                    <input type="hidden" id="status_id" name="status_id" value="">
+                    <div style="display:flex; justify-content: flex-end">
+                        <h3 id="current_status" class="text-success"></h3>
+                    </div>
 
-                <div class="modal-body">
-                    <label>Order Status</label>
-                  <select class="form-control" name="status" id="statusVal">
-                      <option value="pending">Pending</option>
-                      <option value="processing">Processing</option>
-                      <option value="transit">Transit</option>
-                      <option value="delivered">Delivered</option>
-                      <option value="rejected">Rejected</option>
-                  </select>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="submit">Save changes</button>
-                </div>
+                   <div class="form-group">
+                       <label>Email</label>
+                       <input type="email" name="email" id="email" class="form-control"/>
+                   </div>
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <input type="text" name="subject" id="subject" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Body</label>
+                        <textarea class="form-control" rows="10" cols="10"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="submit">Save changes</button>
+                    </div>
             </div>
-        </form>
+            </form>
         </div>
     </div>
     <!--- modal ends here -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
 
         $(document).ready(function () {

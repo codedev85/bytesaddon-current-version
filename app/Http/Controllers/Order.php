@@ -32,6 +32,52 @@ class Order extends Controller
         return view('orders.search-item',compact('searchItem','searchCount'));
     }
 
+    public function orderSearchByParams(Request $request){
+
+        if(!empty($request['order_ref'])){
+
+            $searchItem =  OrderRequest::query()
+                ->whereLike('order_id', $request['order_ref'])
+                ->simplePaginate(20);
+            $searchCount = count( $searchItem );
+
+        }elseif(!empty($request['buyer_email'])){
+
+            $findUserMail = User::where('email',$request['buyer_email'])->first();
+
+            if(is_null($findUserMail)){
+                alert()->error('This email is not tied to any order', 'Oops')->autoclose(3500);
+                return back();
+            }
+            $searchItem =  OrderRequest::query()
+                ->whereLike('user_id', $findUserMail->id)
+                ->simplePaginate(20);
+            $searchCount = count( $searchItem );
+
+        }elseif(!empty($request['buyer_phone'])){
+
+            $searchItem =  OrderRequest::query()
+                ->whereLike('phone_number', $request['buyer_phone'])
+                ->simplePaginate(20);
+            $searchCount = count( $searchItem );
+
+        }elseif(!empty($request['order_status'])){
+            $searchItem =  OrderRequest::query()
+                ->whereLike('status', $request['order_status'])
+                ->simplePaginate(20);
+            $searchCount = count( $searchItem );
+        }elseif(!empty($request['start_date']) && !empty($request['end_date'])){
+            $searchItem =  OrderRequest::query()
+                ->whereBetween('created_at',[$request['start_date'] ,$request['end_date']])
+                ->simplePaginate(20);
+            $searchCount = count( $searchItem );
+        }else{
+            alert()->error('No search result(s) found', 'Oops')->autoclose(3500);
+            return back();
+        }
+        return view('orders.search-item',compact('searchItem','searchCount'));
+    }
+
 
     public function orderStatus($id){
 
@@ -130,7 +176,7 @@ class Order extends Controller
 
                 }
 
-        
+
                 if($order && is_null(auth()->user()->address)){
 
                     User::where('id',auth()->user()->id)->update([
@@ -145,13 +191,13 @@ class Order extends Controller
                 }
 
                 $usersEmail = auth()->user()->email;
-        
+
                 //send mail to admin
                 Mail::to("admin@admin.com")->send(new Sale($orderArray  ,$usersEmail));
 
                 //send mail to the user
                 $user = auth()->user()->name;
-           
+
 
                 Mail::to(auth()->user()->email)->send(new Orders($user, $orderArray));
 
