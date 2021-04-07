@@ -125,4 +125,12 @@ Route::post('/authenticate/admin', [App\Http\Controllers\AdminLogin::class,'admi
         Route::get('/order/{id}/status',[App\Http\Controllers\Order::class ,'orderStatus'])->name('order.status');
 
         Route::post('/update/order/status/{id}',[App\Http\Controllers\Order::class ,'updateOrderStatus'])->name('order.status.update');
+
+        //add admin to handle the account
+        Route::get('/add/admin',[App\Http\Controllers\Admin::class,'add'])->name('admin.add');
+        Route::post('/store/admin',[App\Http\Controllers\Admin::class,'store'])->name('admin.store');
+        Route::get('/all/admin',[App\Http\Controllers\Admin::class,'index'])->name('admin.index');
+        Route::get('/admin/{id}/edit',[App\Http\Controllers\Admin::class,'edit'])->name('admin.edit');
+        Route::POST('/update/admin/{id}',[App\Http\Controllers\Admin::class,'update'])->name('admin.update');
+        Route::get('/admin/delete/{id}',[App\Http\Controllers\Admin::class,'destroy'])->name('admin.destroy');
 });

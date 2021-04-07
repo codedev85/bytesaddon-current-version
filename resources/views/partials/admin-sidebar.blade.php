@@ -77,8 +77,8 @@
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="image"></i><span>Admin</span></a>
                         <ul class="nav-submenu menu-content">
-                            <li><a href="gallery.html">All Admin</a></li>
-                            <li><a href="gallery-with-description.html">Add Admin</a></li>
+                            <li><a href="{{ url('/all/admin') }}">All Admin</a></li>
+                            {{-- <li><a href="gallery-with-description.html">Add Admin</a></li> --}}
                         </ul>
                     </li>
 
