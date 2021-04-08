@@ -100,7 +100,7 @@
                                     <a href="{{ url('/product/'.$product->slug.'/edit') }}">
                                     <button class="dropdown-item" type="button">Edit</button>
                                     </a>
-                                    <button class="dropdown-item" type="button">Status</button>
+                                    <button class="dropdown-item"  type="button" id="updateStatus" data-toggle="modal" data-target="#statusModal"  data-id="{{$product->id}}">Status</button>
                                     <hr>
                                     <button class="dropdown-item" type="button">
                                         <form id="delete-form" method="POST" action="{{ url('/product/delete/'.$product->slug) }}">
@@ -128,5 +128,84 @@
     </div>
 
 
+    <!-- Modal -->
+    <div class="modal fade" id="statusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Change Product Status</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="statusdata">
+                <input type="hidden" id="status_id" name="status_id" value="">
+                <div style="display:flex; justify-content: flex-end">
+                    <h3 id="status_current" class="text-success"></h3>
+                </div>
+                <input type="hidden" id="status_id"/>
+
+                <div class="modal-body">
+                    <label>Product Status</label>
+                  <select class="form-control" name="sales" id="sales">
+                      <option value="On Sales">On Sales</option>
+                      <option value="Top Rated">Top rated</option>
+                  </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submit">Save changes</button>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+        <!--- modal ends here -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('body').on('click', '#submit', function (event) {
+
+                event.preventDefault()
+                var id = $("#status_id").val();
+                var sales = $("#sales").val();
+                $.ajax({
+                    url: '/update/product/status/' + id,
+                    type: "POST",
+                    data: {
+                        id: id,
+                        sales : sales,
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#statusdata').trigger("reset");
+                        $('#statusModal').modal('hide');
+                        window.location.reload(true);
+                    }
+                });
+            });
+
+            $('body').on('click', '#updateStatus', function (event) {
+                event.preventDefault();
+                var id = $(this).data('id');
+            
+                $.get('/product/' + id + '/status', function (data) {
+                    $('#status_id').val(data.data.id);
+                    $('#status_current').text(data.data.push_sales);
+
+                })
+            });
+
+        });
+    </script>
 @endsection
 

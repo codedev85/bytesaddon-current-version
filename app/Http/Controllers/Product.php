@@ -253,4 +253,24 @@ class Product extends Controller
 
       return view('product.search-item',compact('searchItem','searchCount'));
     }
+
+    public function pushSales($id){
+
+       $data = Prod::where('id',$id)->first();
+
+       return response()->json([
+           'data' => $data,
+       ]);
+    }
+
+    public function updatePushSales(Request $request , $id){
+
+       $data =  Prod::where('id',$id)->update([
+            'push_sales'=> $request['sales'],
+        ]);
+        
+        return response()->json([
+            'data' => $data,
+        ]);
+    }
 }

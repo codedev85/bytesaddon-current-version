@@ -25,6 +25,7 @@ class CreateProductsTable extends Migration
             $table->string("image1");
             $table->string("image2");
             $table->string("image3");
+            $table->enum('push_sales' , ['Default','On Sales','Top Rated']);
             $table->timestamps();
         });
     }

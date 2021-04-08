@@ -98,6 +98,12 @@ Route::post('/authenticate/admin', [App\Http\Controllers\AdminLogin::class,'admi
 
         //edit status
         Route::get('product/{slug}/edit',[App\Http\Controllers\Product::class , 'edit'])->name('edit.product');
+        //product status
+        Route::get('product/{id}/status',[App\Http\Controllers\Product::class , 'pushSales'])->name('push.sales');
+        Route::post('/update/product/status/{id}',[App\Http\Controllers\Product::class , 'updatePushSales'])->name('update.push.sales');
+
+        
+        //
         Route::post('/store/product/update/{slug}' , [App\Http\Controllers\Product::class , 'update'])->name('update.product');
         //delete product
         Route::delete('/product/delete/{slug}' , [App\Http\Controllers\Product::class , 'destroy'])->name('delete.product');

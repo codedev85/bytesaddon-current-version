@@ -2708,7 +2708,7 @@
                         </div>
                         <!--  single widget product -->
 
-                        <!--  single widget product -->
+                     {{--    <!--  single widget product -->
                         <div class="single-grid-product list-mode">
                             <div class="list-mode-image">
                                 <a href="single-product.html">
@@ -2821,7 +2821,7 @@
                                 <p class="product-price"><span class="discounted-price">$85.00</span> <span class="main-price discounted">$100.00</span></p>
                             </div>
                         </div>
-                        <!--  single widget product -->
+                        <!--  single widget product --> --}}
                     </div>
                     <!-- End of widget product list wrapper -->
                 </div>
@@ -2842,14 +2842,16 @@
                     <!--  widget product list wrapper -->
                     <div class="widget-product-list-wrapper list-product-slider-two top-nav">
                         <!--  single widget product -->
+                        @foreach($latestProducts as $product)
                         <div class="single-grid-product list-mode">
                             <div class="list-mode-image">
-                                <a href="single-product.html">
-                                    <img src="assets/images/product/product-12.jpg" class="img-fluid" alt="">
+                                <a href="{{url('/product/'.$product->id.'-'.$product->slug)}}">
+                                    <img src="{{url('storage/'.$product->image1)}}" class="img-fluid" alt="">
                                 </a>
                             </div>
                             <div class="list-mode-content">
-                                <h3 class="title"> <a href="single-product.html">posuere consectetur urna</a></h3>
+                                <h3 class="title">
+                                    <a href="{{url('/product/'.$product->id.'-'.$product->slug)}}">{{Ucfirst(str_limit($product->name, $limit=30 , $end='...'))}}</a></h3>
                                 <div class="product-category-rating">
                                             <span class="rating float-none">
                                             <i class="lnr lnr-star"></i>
@@ -2859,193 +2861,12 @@
                                             <i class="lnr lnr-star"></i>
                                         </span>
                                 </div>
-                                <p class="product-price"><span class="discounted-price">$80.00</span> <span class="main-price discounted">$100.00</span></p>
+                                <p class="product-price"><span class="discounted-price">&#8358;  {{ number_format($product->amount) }}</span> 
+                                    {{-- <span class="main-price discounted">$100.00</span> --}}
+                                </p>
                             </div>
                         </div>
-                        <!--  single widget product -->
-
-                        <!--  single widget product -->
-                        <div class="single-grid-product list-mode">
-                            <div class="list-mode-image">
-                                <a href="single-product.html">
-                                    <img src="assets/images/product/product-14.jpg" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="list-mode-content">
-                                <h3 class="title"> <a href="single-product.html">dapibus urna consectet</a></h3>
-                                <div class="product-category-rating">
-                                            <span class="rating float-none">
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                        </span>
-                                </div>
-                                <p class="product-price"><span class="discounted-price">$58.00</span></p>
-                            </div>
-                        </div>
-                        <!--  single widget product -->
-
-                        <!--  single widget product -->
-                        <div class="single-grid-product list-mode">
-                            <div class="list-mode-image">
-                                <a href="single-product.html">
-                                    <img src="assets/images/product/product-23.jpg" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="list-mode-content">
-                                <h3 class="title"> <a href="single-product.html">consectetur dui placerat</a></h3>
-                                <div class="product-category-rating">
-                                            <span class="rating float-none">
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                        </span>
-                                </div>
-                                <p class="product-price"><span class="discounted-price">$48.00</span> <span class="main-price discounted">$78.00</span></p>
-                            </div>
-                        </div>
-                        <!--  single widget product -->
-
-                        <!--  single widget product -->
-                        <div class="single-grid-product list-mode">
-                            <div class="list-mode-image">
-                                <a href="single-product.html">
-                                    <img src="assets/images/product/product-14.jpg" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="list-mode-content">
-                                <h3 class="title"> <a href="single-product.html">Aliquam lobortis est tur</a></h3>
-                                <div class="product-category-rating">
-                                            <span class="rating float-none">
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                        </span>
-                                </div>
-                                <p class="product-price"><span class="discounted-price">$80.00</span> <span class="main-price discounted">$100.00</span></p>
-                            </div>
-                        </div>
-                        <!--  single widget product -->
-
-                        <!--  single widget product -->
-                        <div class="single-grid-product list-mode">
-                            <div class="list-mode-image">
-                                <a href="single-product.html">
-                                    <img src="assets/images/product/product-25.jpg" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="list-mode-content">
-                                <h3 class="title"> <a href="single-product.html">Aliquam lobortis pellent</a></h3>
-                                <div class="product-category-rating">
-                                            <span class="rating float-none">
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                        </span>
-                                </div>
-                                <p class="product-price"><span class="discounted-price">$70.00</span> <span class="main-price discounted">$95.00</span></p>
-                            </div>
-                        </div>
-                        <!--  single widget product -->
-
-                        <!--  single widget product -->
-                        <div class="single-grid-product list-mode">
-                            <div class="list-mode-image">
-                                <a href="single-product.html">
-                                    <img src="assets/images/product/product-19.jpg" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="list-mode-content">
-                                <h3 class="title"> <a href="single-product.html">arcu et faucibus commodo</a></h3>
-                                <div class="product-category-rating">
-                                            <span class="rating float-none">
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                        </span>
-                                </div>
-                                <p class="product-price"><span class="discounted-price">$60.00</span></p>
-                            </div>
-                        </div>
-                        <!--  single widget product -->
-
-                        <!--  single widget product -->
-                        <div class="single-grid-product list-mode">
-                            <div class="list-mode-image">
-                                <a href="single-product.html">
-                                    <img src="assets/images/product/product-7.jpg" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="list-mode-content">
-                                <h3 class="title"> <a href="single-product.html">ellus ac nulla pellentesque</a></h3>
-                                <div class="product-category-rating">
-                                            <span class="rating float-none">
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                        </span>
-                                </div>
-                                <p class="product-price"><span class="discounted-price">$59.00</span> <span class="main-price discounted">$70.00</span></p>
-                            </div>
-                        </div>
-                        <!--  single widget product -->
-
-                        <!--  single widget product -->
-                        <div class="single-grid-product list-mode">
-                            <div class="list-mode-image">
-                                <a href="single-product.html">
-                                    <img src="assets/images/product/product-28.jpg" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="list-mode-content">
-                                <h3 class="title"> <a href="single-product.html">itae neque nulla nec posuere sem</a></h3>
-                                <div class="product-category-rating">
-                                            <span class="rating float-none">
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                        </span>
-                                </div>
-                                <p class="product-price"><span class="discounted-price">$90.00</span> <span class="main-price discounted">$120.00</span></p>
-                            </div>
-                        </div>
-                        <!--  single widget product -->
-
-                        <!--  single widget product -->
-                        <div class="single-grid-product list-mode">
-                            <div class="list-mode-image">
-                                <a href="single-product.html">
-                                    <img src="assets/images/product/product-29.jpg" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="list-mode-content">
-                                <h3 class="title"> <a href="single-product.html">Fusce ultricies dolor vitae</a></h3>
-                                <div class="product-category-rating">
-                                            <span class="rating float-none">
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                            <i class="lnr lnr-star"></i>
-                                        </span>
-                                </div>
-                                <p class="product-price"><span class="discounted-price">$85.00</span> <span class="main-price discounted">$100.00</span></p>
-                            </div>
-                        </div>
+                        @endforeach 
                         <!--  single widget product -->
                     </div>
                     <!-- End of widget product list wrapper -->
@@ -3065,6 +2886,7 @@
                     <!-- widget product list title -->
 
                     <!--  widget product list wrapper -->
+                    @foreach($latestProducts as $product)
                     <div class="widget-product-list-wrapper list-product-slider-three top-nav">
                         <!--  single widget product -->
                         <div class="single-grid-product list-mode">
@@ -3273,6 +3095,7 @@
                         </div>
                         <!--  single widget product -->
                     </div>
+                    @endforeach 
                     <!-- End of widget product list wrapper -->
                 </div>
                 <!--  Product List Widget Wrapper -->

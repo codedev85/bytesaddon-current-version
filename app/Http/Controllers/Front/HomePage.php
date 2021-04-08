@@ -17,8 +17,9 @@ class HomePage extends Controller
         $randomProducts = Product::inRandomOrder()->take(8)->get();
         $cartCollection = Cart::getContent();
         $limitedOfferProduct = Product::inRandomOrder()->take(8)->get();
+        $latestProducts = Product::orderby('created_at','DESC')->take(8)->get();
 //dd($cartCollection);
-        return view('shop.index' , compact('categories','products','cartCollection' , 'limitedOfferProduct','randomProducts'));
+        return view('shop.index' , compact('categories','products','cartCollection' , 'limitedOfferProduct','randomProducts','latestProducts'));
     }
 
 
